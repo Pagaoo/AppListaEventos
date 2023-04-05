@@ -1,8 +1,10 @@
-package devandroid.gabriel.applistanomes;
+package devandroid.gabriel.applistanomes.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import devandroid.gabriel.applistanomes.R;
 
 public class MainActivity extends AppCompatActivity {
 

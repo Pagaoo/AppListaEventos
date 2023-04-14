@@ -1,6 +1,7 @@
 package devandroid.gabriel.applistanomes.view;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,5 +18,11 @@ public class MainActivity extends AppCompatActivity {
 
         person = new Person();
 
+        person.setFirstName("Gabriel");
+        person.setSurname("Paganini");
+        person.setListEvent("Futzinho");
+        person.setTelephone((double) 27.999610118);
+
+        Log.i("PersonInfo", person.toString());
     }
 }

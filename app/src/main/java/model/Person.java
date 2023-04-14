@@ -41,4 +41,14 @@ public class Person {
     public void setTelephone(Double telephone) {
         this.telephone = telephone;
     }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "firstName='" + firstName + '\'' +
+                ", surname='" + surname + '\'' +
+                ", listEvent='" + listEvent + '\'' +
+                ", telephone=" + telephone +
+                '}';
+    }
 }

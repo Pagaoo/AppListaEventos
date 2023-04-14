@@ -5,7 +5,7 @@ public class Person {
     private String firstName;
     private String surname;
     private String listEvent;
-    private Double telephone;
+    private String telephone;
 
     public Person() {
     }
@@ -34,11 +34,11 @@ public class Person {
         this.listEvent = listEvent;
     }
 
-    public Double getTelephone() {
+    public String getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(Double telephone) {
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 

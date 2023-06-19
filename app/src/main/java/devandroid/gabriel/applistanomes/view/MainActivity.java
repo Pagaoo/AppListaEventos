@@ -48,34 +48,25 @@ public class MainActivity extends AppCompatActivity {
         editEvent.setText(person.getListEvent());
         editTelephone.setText(person.getTelephone());
 
-        btnClear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editFirstName.setText("");
-                editSurname.setText("");
-                editEvent.setText("");
-                editTelephone.setText("");
-            }
+        btnClear.setOnClickListener(view -> {
+            editFirstName.setText("");
+            editSurname.setText("");
+            editEvent.setText("");
+            editTelephone.setText("");
         });
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                person.setFirstName(editFirstName.getText().toString());
-                person.setSurname(editSurname.getText().toString());
-                person.setListEvent(editEvent.getText().toString());
-                person.setTelephone(editTelephone.getText().toString());
+        btnSave.setOnClickListener(view -> {
+            person.setFirstName(editFirstName.getText().toString());
+            person.setSurname(editSurname.getText().toString());
+            person.setListEvent(editEvent.getText().toString());
+            person.setTelephone(editTelephone.getText().toString());
 
-                Toast.makeText(MainActivity.this, "Salvando " + person.toString(), Toast.LENGTH_LONG).show();
-            }
+            Toast.makeText(MainActivity.this, "Salvando " + person.toString(), Toast.LENGTH_LONG).show();
         });
 
-        btnDone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Saindo do aplicativo...", Toast.LENGTH_LONG).show();
-                finish();
-            }
+        btnDone.setOnClickListener(view -> {
+            Toast.makeText(MainActivity.this, "Saindo do aplicativo...", Toast.LENGTH_LONG).show();
+            finish();
         });
 
         Log.i("PersonInfo", person.toString());

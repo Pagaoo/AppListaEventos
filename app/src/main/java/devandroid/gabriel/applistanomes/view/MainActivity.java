@@ -1,5 +1,6 @@
 package devandroid.gabriel.applistanomes.view;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,10 +10,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import controller.PersonController;
 import devandroid.gabriel.applistanomes.R;
 import model.Person;
 
 public class MainActivity extends AppCompatActivity {
+
+    SharedPreferences preferences;
+    public static final String NOME_PREFERENCES = "pref_lista";
+    PersonController personController;
     Person person;
     EditText editFirstName;
     EditText editSurname;
@@ -27,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        preferences = getSharedPreferences(NOME_PREFERENCES, 0);
+        SharedPreferences.Editor listas = preferences.edit();
+        personController = new PersonController();
         person = new Person();
 
         person.setFirstName("Gabriel");
@@ -62,6 +71,12 @@ public class MainActivity extends AppCompatActivity {
             person.setTelephone(editTelephone.getText().toString());
 
             Toast.makeText(MainActivity.this, "Salvando " + person.toString(), Toast.LENGTH_LONG).show();
+            listas.putString("firstName", person.getFirstName());
+            listas.putString("surname", person.getSurname());
+            listas.putString("event", person.getListEvent());
+            listas.putString("telephone", person.getTelephone());
+            listas.apply();
+            personController.save(person);
         });
 
         btnDone.setOnClickListener(view -> {

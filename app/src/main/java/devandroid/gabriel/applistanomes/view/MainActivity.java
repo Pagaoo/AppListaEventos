@@ -34,28 +34,28 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         preferences = getSharedPreferences(NOME_PREFERENCES, 0);
-        SharedPreferences.Editor listas = preferences.edit();
+        SharedPreferences.Editor events = preferences.edit();
         personController = new PersonController();
         person = new Person();
 
-        person.setFirstName("Gabriel");
-        person.setSurname("Paganini");
-        person.setListEvent("Futzinho");
-        person.setTelephone("27 9 99610118");
+        person.setFirstName(preferences.getString("firstName", ""));
+        person.setSurname(preferences.getString("surname", ""));
+        person.setTelephone(preferences.getString("telephone",""));
+        person.setListEvent(preferences.getString("event", ""));
 
         editFirstName = findViewById(R.id.editFirstName);
         editSurname = findViewById(R.id.editSurname);
-        editEvent = findViewById(R.id.editEvent);
         editTelephone = findViewById(R.id.editTelephone);
+        editEvent = findViewById(R.id.editEvent);
+
+        editFirstName.setText(person.getFirstName());
+        editSurname.setText(person.getSurname());
+        editTelephone.setText(person.getTelephone());
+        editEvent.setText(person.getListEvent());
 
         btnClear = findViewById(R.id.btnClear);
         btnSave = findViewById(R.id.btnSave);
         btnDone = findViewById(R.id.btnDone);
-
-        editFirstName.setText(person.getFirstName());
-        editSurname.setText(person.getSurname());
-        editEvent.setText(person.getListEvent());
-        editTelephone.setText(person.getTelephone());
 
         btnClear.setOnClickListener(view -> {
             editFirstName.setText("");
@@ -71,11 +71,11 @@ public class MainActivity extends AppCompatActivity {
             person.setTelephone(editTelephone.getText().toString());
 
             Toast.makeText(MainActivity.this, "Salvando " + person.toString(), Toast.LENGTH_LONG).show();
-            listas.putString("firstName", person.getFirstName());
-            listas.putString("surname", person.getSurname());
-            listas.putString("event", person.getListEvent());
-            listas.putString("telephone", person.getTelephone());
-            listas.apply();
+            events.putString("firstName", person.getFirstName());
+            events.putString("surname", person.getSurname());
+            events.putString("event", person.getListEvent());
+            events.putString("telephone", person.getTelephone());
+            events.apply();
             personController.save(person);
         });
 

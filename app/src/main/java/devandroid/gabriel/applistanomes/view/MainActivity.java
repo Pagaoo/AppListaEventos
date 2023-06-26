@@ -17,7 +17,8 @@ import model.Person;
 public class MainActivity extends AppCompatActivity {
 
     SharedPreferences preferences;
-    public static final String NOME_PREFERENCES = "pref_lista";
+    SharedPreferences.Editor events;
+    public static final String NOME_PREFERENCES = "pref_event";
     PersonController personController;
     Person person;
     EditText editFirstName;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         preferences = getSharedPreferences(NOME_PREFERENCES, 0);
-        SharedPreferences.Editor events = preferences.edit();
+        events = preferences.edit();
         personController = new PersonController();
         person = new Person();
 
@@ -62,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
             editSurname.setText("");
             editEvent.setText("");
             editTelephone.setText("");
+
+            events.clear();
+            events.apply();
         });
 
         btnSave.setOnClickListener(view -> {

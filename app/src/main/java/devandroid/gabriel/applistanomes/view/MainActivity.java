@@ -16,9 +16,6 @@ import model.Person;
 
 public class MainActivity extends AppCompatActivity {
 
-    SharedPreferences preferences;
-    SharedPreferences.Editor events;
-    public static final String NOME_PREFERENCES = "pref_event";
     PersonController personController;
     Person person;
     EditText editFirstName;
@@ -34,15 +31,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        preferences = getSharedPreferences(NOME_PREFERENCES, 0);
-        events = preferences.edit();
-        personController = new PersonController();
+        personController = new PersonController(MainActivity.this);
         person = new Person();
-
-        person.setFirstName(preferences.getString("firstName", ""));
-        person.setSurname(preferences.getString("surname", ""));
-        person.setTelephone(preferences.getString("telephone",""));
-        person.setListEvent(preferences.getString("event", ""));
+        personController.find(person);
 
         editFirstName = findViewById(R.id.editFirstName);
         editSurname = findViewById(R.id.editSurname);
@@ -64,8 +55,7 @@ public class MainActivity extends AppCompatActivity {
             editEvent.setText("");
             editTelephone.setText("");
 
-            events.clear();
-            events.apply();
+            personController.clear();
         });
 
         btnSave.setOnClickListener(view -> {
@@ -75,11 +65,6 @@ public class MainActivity extends AppCompatActivity {
             person.setTelephone(editTelephone.getText().toString());
 
             Toast.makeText(MainActivity.this, "Salvando " + person.toString(), Toast.LENGTH_LONG).show();
-            events.putString("firstName", person.getFirstName());
-            events.putString("surname", person.getSurname());
-            events.putString("event", person.getListEvent());
-            events.putString("telephone", person.getTelephone());
-            events.apply();
             personController.save(person);
         });
 

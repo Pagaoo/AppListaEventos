@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         personController.find(person);
 
         eventController = new EventController();
-        eventList = eventController.getListaEvents();
+        eventList = eventController.getListEvents();
 
         editFirstName = findViewById(R.id.editFirstName);
         editSurname = findViewById(R.id.editSurname);

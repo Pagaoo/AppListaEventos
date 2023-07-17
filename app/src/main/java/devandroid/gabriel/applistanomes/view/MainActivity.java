@@ -2,8 +2,10 @@ package devandroid.gabriel.applistanomes.view;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +15,6 @@ import java.util.List;
 import controller.EventController;
 import controller.PersonController;
 import devandroid.gabriel.applistanomes.R;
-import model.Event;
 import model.Person;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     PersonController personController;
     EventController eventController;
     Person person;
-    List<Event> eventList;
+    List<String> eventNames;
     EditText editFirstName;
     EditText editSurname;
     EditText editEvent;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnClear;
     Button btnSave;
     Button btnDone;
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +42,13 @@ public class MainActivity extends AppCompatActivity {
         personController.find(person);
 
         eventController = new EventController();
-        eventList = eventController.getListEvents();
+        eventNames = eventController.spinnerData();
 
         editFirstName = findViewById(R.id.editFirstName);
         editSurname = findViewById(R.id.editSurname);
         editTelephone = findViewById(R.id.editTelephone);
         editEvent = findViewById(R.id.editEvent);
+        spinner = findViewById(R.id.spinner);
 
         editFirstName.setText(person.getFirstName());
         editSurname.setText(person.getSurname());
@@ -55,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
         btnClear = findViewById(R.id.btnClear);
         btnSave = findViewById(R.id.btnSave);
         btnDone = findViewById(R.id.btnDone);
+
+        //cria uma array adapter para recuperar os eventos no spinner usando um layout simple list
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
+            eventController.spinnerData());
+        adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
+        spinner.setAdapter(adapter);
 
         btnClear.setOnClickListener(view -> {
             editFirstName.setText("");

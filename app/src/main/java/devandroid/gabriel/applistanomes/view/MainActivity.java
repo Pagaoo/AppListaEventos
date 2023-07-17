@@ -1,23 +1,27 @@
 package devandroid.gabriel.applistanomes.view;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
+import controller.EventController;
 import controller.PersonController;
 import devandroid.gabriel.applistanomes.R;
+import model.Event;
 import model.Person;
 
 public class MainActivity extends AppCompatActivity {
 
     PersonController personController;
+    EventController eventController;
     Person person;
+    List<Event> eventList;
     EditText editFirstName;
     EditText editSurname;
     EditText editEvent;
@@ -34,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
         personController = new PersonController(MainActivity.this);
         person = new Person();
         personController.find(person);
+
+        eventController = new EventController();
+        eventList = eventController.getListaEvents();
 
         editFirstName = findViewById(R.id.editFirstName);
         editSurname = findViewById(R.id.editSurname);

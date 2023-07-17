@@ -1,3 +1,3 @@
-# AppListaNomes
+# AppListaEventos
 
 Projetinho de lista usando android studio e java

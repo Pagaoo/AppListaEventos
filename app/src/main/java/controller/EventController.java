@@ -9,7 +9,7 @@ public class EventController {
 
     private List eventList;
 
-    public List getListaEvents() {
+    public List getListEvents() {
         eventList = new ArrayList<Event>();
         eventList.add(new Event("Futebol de cria"));
         eventList.add(new Event("Show do Busco Esposa"));
@@ -18,6 +18,15 @@ public class EventController {
         eventList.add(new Event("Filme da Barbie"));
 
         return eventList;
+    }
+
+    public ArrayList<String> spinnerData() {
+        ArrayList<String> data = new ArrayList<>();
+        for (int i = 0; i < getListEvents().size(); i++) {
+            Event obj = (Event) getListEvents().get(i);
+            data.add(obj.getEventName());
+        }
+        return data;
     }
 
 }
